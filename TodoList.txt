@@ -1,0 +1,4 @@
+TODO
+1. Shaders  -- REMINDER, Shaders was moved to core OpenGL, don't use glGetObjectParameteriv().
+2. Shadows
+3. Buttons
