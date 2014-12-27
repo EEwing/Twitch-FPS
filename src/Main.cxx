@@ -22,12 +22,13 @@ void render() {
 	
     gluPerspective(45, (float)SCREEN_WIDTH/SCREEN_HEIGHT, 0.1, 100);
 	
-    player->CalculateMovement();
 	
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 	
-	// Move and call render at location
+    // Move and call render at location
+    player->CalculateMovement();
+
     glPushMatrix();
       player->Render();
     glPopMatrix();
@@ -157,9 +158,6 @@ void init() {
 	//initShadows();
 	initShaders();
 
-        glEnable(GL_TEXTURE_2D); 
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	glClearColor(0.6, 0.6, 0.6, 1);
 	glEnable(GL_BLEND);

@@ -89,12 +89,11 @@ void Player::Render() {
     GLfloat mat_shine[]       = { 50 };
     GLfloat mat_noshine[]     = { 1 };
 
-
+    // Begin Floor
     glColor3f(1., 0., 1.);
     glNormal3f(0, 1, 0);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_spec);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_noshine);
-    // Begin Floor
     for(int i=-10; i<10; i++) {
         for(int j=-10; j<10; j++) {
 	    glBegin(GL_TRIANGLE_FAN);
@@ -108,6 +107,7 @@ void Player::Render() {
         }
     }
     // End Floor
+
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_spec);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shine);
     glColor3f(0, 1, 1);
