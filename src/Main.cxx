@@ -35,7 +35,7 @@ void render() {
 
 void renderScene() {
     player->CalculateMovement();
-
+    
     //RenderToTexture();
 
     //render();
