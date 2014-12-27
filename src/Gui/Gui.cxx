@@ -77,13 +77,13 @@ void Gui::Render() {
 	double xOff, yOff;
 	xOff = (float)GetWidth()/SCREEN_WIDTH;
 	yOff = (float)GetHeight()/SCREEN_HEIGHT;
-	fprintf(stderr, "Rendering Gui @ %lf %lf to %lf %lf\n", locationX, locationY, xOff, yOff);
+	//fprintf(stderr, "Rendering Gui @ %lf %lf to %lf %lf\n", locationX, locationY, xOff, yOff);
 	glPushAttrib(GL_TEXTURE_BIT);
           glEnable(GL_TEXTURE_2D); 
           glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
           glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	  glBindTexture(GL_TEXTURE_2D, texture);
-	  //glBindTexture(GL_TEXTURE_2D, shadowTexture);
+	  //glBindTexture(GL_TEXTURE_2D, texture);
+	  glBindTexture(GL_TEXTURE_2D, shadowTexture);
 	  glBegin(GL_QUADS);
 	    glColor4f(1., 1., 1., 1.);
 	    glTexCoord2d(0., 0.);	glVertex2d(locationX,      locationY);

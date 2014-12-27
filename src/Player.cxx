@@ -118,12 +118,12 @@ void Player::Render() {
         glPushAttrib(GL_LIGHTING_BIT | GL_DEPTH_BUFFER_BIT | GL_TEXTURE_BIT);
           glMatrixMode(GL_PROJECTION);
           glLoadIdentity();
+          gluOrtho2D(0, 1, 0, 1);
+          glMatrixMode(GL_MODELVIEW);
+          glLoadIdentity();
           glPushMatrix();
             glDisable(GL_LIGHTING);
             glDisable(GL_DEPTH_TEST);
-            gluOrtho2D(0, 1, 0, 1);
-            glMatrixMode(GL_MODELVIEW);
-            glLoadIdentity();
             glBegin(GL_QUADS);
               glColor4f(0., 0., 0., .5);
               glVertex2d(0, 0);

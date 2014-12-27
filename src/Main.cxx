@@ -33,16 +33,39 @@ void render() {
     glPopMatrix();
 }
 
+void renderShadow() {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glPushAttrib(GL_LIGHTING_BIT | GL_DEPTH_BUFFER_BIT | GL_TEXTURE_BIT);
+          glMatrixMode(GL_PROJECTION);
+          glLoadIdentity();
+          gluOrtho2D(0, 1, 0, 1);
+          glMatrixMode(GL_MODELVIEW);
+          glLoadIdentity();
+          glDisable(GL_LIGHTING);
+          glDisable(GL_DEPTH_TEST);
+          glColor4f(1., 1., 1., 1.);
+	  glEnable(GL_TEXTURE_2D);
+	  glBindTexture(GL_TEXTURE_2D, shadowTexture);
+          glBegin(GL_QUADS);
+            glTexCoord2f(0, 0); glVertex2f(0.1, 0.1);
+            glTexCoord2f(1, 0); glVertex2f(0.9, 0.1);
+            glTexCoord2f(1, 1); glVertex2f(0.9, 0.9);
+            glTexCoord2f(0, 1); glVertex2f(0.1, 0.9);
+          glEnd();
+        glPopAttrib();	
+}
+
 void renderScene() {
     player->CalculateMovement();
     
-    //RenderToTexture();
+    RenderToTexture();
 
-    //render();
-
-    //glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     render();
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    renderShadow();
 	
     glutSwapBuffers();
 }
@@ -156,7 +179,7 @@ void init() {
 	glutWarpPointer(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
 	gluPerspective(45, (float)SCREEN_WIDTH/SCREEN_HEIGHT, 0.1, 100);
 	initLighting();
-	//initShadows();
+	initShadows();
 	initShaders();
 
 

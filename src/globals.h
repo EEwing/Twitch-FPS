@@ -6,6 +6,7 @@ extern int SCREEN_HEIGHT;
 
 extern GLuint shadowTexture;
 extern GLuint shadowFramebuffer;
+extern GLuint shadowRenderbuffer;
 
 void initShadows();
 
