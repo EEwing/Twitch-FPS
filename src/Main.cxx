@@ -27,7 +27,6 @@ void render() {
     glLoadIdentity();
 	
     // Move and call render at location
-    player->CalculateMovement();
 
     glPushMatrix();
       player->Render();
@@ -35,11 +34,13 @@ void render() {
 }
 
 void renderScene() {
-    RenderToTexture();
+    player->CalculateMovement();
 
-    render();
+    //RenderToTexture();
 
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    //render();
+
+    //glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     render();
 	
