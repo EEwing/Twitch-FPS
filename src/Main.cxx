@@ -35,11 +35,11 @@ void render() {
 }
 
 void renderScene() {
-    //RenderToTexture();
+    RenderToTexture();
 
-    //render();
+    render();
 
-    //glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     render();
 	
