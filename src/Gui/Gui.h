@@ -6,7 +6,7 @@
 #include <GL/glu.h>
 
 #include "Button.h"
-#include "Player.h"
+#include "Entity/Player.h"
 
 class Player;
 

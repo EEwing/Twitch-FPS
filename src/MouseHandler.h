@@ -1,7 +1,7 @@
 #ifndef MOUSEHANDLER_H
 #define MOUSEHANDLER_H
 
-#include "Player.h"
+#include "Entity/Player.h"
 
 class Player;
 

@@ -100,7 +100,7 @@ void Gui::ProcessMouseEvent(int x, int y) {
 	int pixelY = locationY*SCREEN_HEIGHT;
 	int pixelWidth = scale*SCREEN_WIDTH;
 	int pixelHeight = scale*SCREEN_HEIGHT;
-	if(x > pixelX && x < pixelX+pixelWidth && y > pixelY && y < pixelY+pixelHeight) {
+	if(x > pixelX && x < pixelX+GetWidth() && y > pixelY && y < pixelY+GetHeight()) {
 		fprintf(stderr, "Mouse is on GUI\n");
 	}
 }
@@ -124,5 +124,6 @@ Gui *Gui::SetExitGui(Gui *g) {
 void Gui::Close() {
 	player->OpenGui(exitGui);
 }
+
 
 GuiMainMenu::GuiMainMenu(Player *p) : Gui("Main.png", p){}

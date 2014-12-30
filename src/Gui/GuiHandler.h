@@ -3,7 +3,7 @@
 
 //#include "GuiMainMenu.h"
 #include "Gui.h"
-#include "Player.h"
+#include "Entity/Player.h"
 
 class Gui;
 class GuiMainMenu;

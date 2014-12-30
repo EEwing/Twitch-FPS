@@ -1,71 +1,68 @@
-#include <stdio.h>
+#include <fstream>
+
 #include <GL/glew.h>
 #include <GL/glu.h>
 #include <GL/freeglut.h>
-#include <fstream>
-#include <sstream>
 
+#include <sstream>
+#include <stdio.h>
+
+#include "Entity/Player.h"
+#include "Event/Event.h"
+#include "Event/PlayerMoveEvent.h"
+#include "globals.h"
 #include "Gui/Gui.h"
 #include "RenderUtils.h"
-#include "Player.h"
-#include "globals.h"
 
 Player *player;
 
 int SCREEN_WIDTH  = 800;
 int SCREEN_HEIGHT = 600;
 
-void render() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-	
-    gluPerspective(45, (float)SCREEN_WIDTH/SCREEN_HEIGHT, 0.1, 100);
-	
-	
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-	
-    // Move and call render at location
-
-    glPushMatrix();
-      player->Render();
-    glPopMatrix();
-}
-
 void renderShadow() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glPushAttrib(GL_LIGHTING_BIT | GL_DEPTH_BUFFER_BIT | GL_TEXTURE_BIT);
-          glMatrixMode(GL_PROJECTION);
-          glLoadIdentity();
-          gluOrtho2D(0, 1, 0, 1);
-          glMatrixMode(GL_MODELVIEW);
-          glLoadIdentity();
-          glDisable(GL_LIGHTING);
-          glDisable(GL_DEPTH_TEST);
-          glColor4f(1., 1., 1., 1.);
-	  glEnable(GL_TEXTURE_2D);
-	  glBindTexture(GL_TEXTURE_2D, shadowTexture);
-          glBegin(GL_QUADS);
-            glTexCoord2f(0, 0); glVertex2f(0.1, 0.1);
-            glTexCoord2f(1, 0); glVertex2f(0.9, 0.1);
-            glTexCoord2f(1, 1); glVertex2f(0.9, 0.9);
-            glTexCoord2f(0, 1); glVertex2f(0.1, 0.9);
-          glEnd();
-        glPopAttrib();	
+    glPushAttrib(GL_LIGHTING_BIT | GL_DEPTH_BUFFER_BIT | GL_TEXTURE_BIT);
+      glMatrixMode(GL_PROJECTION);
+      glLoadIdentity();
+      gluOrtho2D(0, 1, 0, 1);
+      glMatrixMode(GL_MODELVIEW);
+      glLoadIdentity();
+      glDisable(GL_LIGHTING);
+//      glDisable(GL_DEPTH_TEST);
+      glColor4f(1., 1., 1., 1.);
+      glEnable(GL_TEXTURE_2D);
+      glBindTexture(GL_TEXTURE_2D, shadowTexture);
+
+      glBegin(GL_QUADS);
+        glTexCoord2f(0, 0); glVertex2f(0, 0);
+        glTexCoord2f(1, 0); glVertex2f(1, 0);
+        glTexCoord2f(1, 1); glVertex2f(1, 1);
+        glTexCoord2f(0, 1); glVertex2f(0, 1);
+      glEnd();
+    glPopAttrib();	
 }
 
 void renderScene() {
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(45, (float)SCREEN_WIDTH/SCREEN_HEIGHT, 0.1, 100);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
     player->CalculateMovement();
-    
-    RenderToTexture();
+
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, shadowFramebuffer);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    render();
+
+    player->RenderWorld();
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     renderShadow();
+    player->RenderHUD();
+    player->RenderGui();
 	
     glutSwapBuffers();
 }
@@ -226,6 +223,8 @@ void resize(int x, int y) {
 }
 
 int main(int argc, char **argv) {
+
+
 	fprintf(stderr, "Initializing GLUT variables\n");
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);

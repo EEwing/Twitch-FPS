@@ -36,6 +36,9 @@ class Vector {
    Vector operator/(const double&);
 
    Vector operator%(const double&);
+
 };
+bool   operator==(const Vector&, const Vector&);
+bool   operator!=(const Vector&, const Vector&);
 
 #endif

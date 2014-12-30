@@ -1,7 +1,7 @@
 #ifndef KEYBOARDHANDLER_H
 #define KEYBOARDHANDLER_H
 
-#include "Player.h"
+#include "Entity/Player.h"
 
 class Player;
 

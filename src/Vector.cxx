@@ -85,3 +85,11 @@ Vector Vector::operator%(const double& mod)
    while(newZ >= mod) { newZ-= mod; };
    return Vector(newX, newY, newZ);
 }
+bool   operator==(const Vector& first, const Vector &other) {
+    return (first.x == other.x &&
+            first.y == other.y &&
+            first.z == other.z);
+}
+bool   operator!=(const Vector& first, const Vector &second) {
+    return !(first==second);
+}
