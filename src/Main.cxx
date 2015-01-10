@@ -44,7 +44,7 @@ void renderShadow() {
 void renderScene() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45, (float)SCREEN_WIDTH/SCREEN_HEIGHT, 0.1, 100);
+    gluPerspective(45, (float)SCREEN_WIDTH/SCREEN_HEIGHT, 0.1, 1000);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -175,6 +175,7 @@ void init() {
 	glutSetCursor(GLUT_CURSOR_NONE);
 	glutWarpPointer(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
 	gluPerspective(45, (float)SCREEN_WIDTH/SCREEN_HEIGHT, 0.1, 100);
+    Cell::init();
 	initLighting();
 	initShadows();
 	initShaders();

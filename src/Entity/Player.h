@@ -7,18 +7,21 @@
 #include "KeyboardHandler.h"
 #include "MouseHandler.h"
 #include "Vector.h"
+#include "World.h"
 
 class KeyboardHandler;
 class MouseHandler;
 
 class Gui;
 class GuiHandler;
+class World;
 
 class Player : public Entity {
   private:
 	double 				xRot, yRot; // in degrees
 	double				height;
 	Vector 				location, direction;
+    World              *world;
 	void 				UpdateKeys();
 	double				sensitivity;
   public:

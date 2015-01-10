@@ -3,21 +3,25 @@
 
 #include <vector>
 
-#include "Cell.h"
+#include "CellColumn.h"
 #include "Entity/Player.h"
 
-extern int RENDER_DISTANCE;
+class CellColumn;
+
+extern int LOAD_DISTANCE;
+extern int UNLOAD_DISTANCE;
 
 class World {
 
   private:
     int id;
-    std::vector<Cell> renderedAreas;
+    std::vector<CellColumn *> renderedAreas;
 
   public:
+    static const int WORLD_HEIGHT;
              World(void);
 
-    void     LoadArea(Player);
+    void     LoadArea(Player &);
     void     Render();
 };
 

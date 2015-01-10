@@ -20,6 +20,7 @@ Player::Player() :  keyHandler(new KeyboardHandler(this)),
     sensitivity = 1.0;
     inGui = false;
     curGui = NULL;
+    world = new World();
 }
 
 Player::~Player(){
@@ -84,9 +85,13 @@ void Player::RenderWorld() {
         location.x+direction.x, location.y+direction.y, location.z+direction.z,
         0, 1, 0);       
 
-      GLfloat light_position[] = {0., 5., 5., 0.};
+      GLfloat light_position[] = {0., 5., 5., 1.};
       glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
+      world->LoadArea(*this);
+
+      world->Render();
+      /*
       GLfloat mat_spec[]    = {1., 1., 1., 1.0};
       GLfloat mat_shine[]       = { 50 };
       GLfloat mat_noshine[]     = { 1 };
@@ -116,6 +121,7 @@ void Player::RenderWorld() {
       glTranslatef(0, 1, 0);
       glutSolidSphere(2, 50, 50);
     glPopMatrix();
+    */
 }
 
 void Player::RenderHUD() {

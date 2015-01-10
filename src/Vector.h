@@ -15,29 +15,29 @@ class Vector {
           Vector();
 
    // Class functions
-   double GetMagnitude();
+   double GetMagnitude() const;
 
-   Vector normalize();
-   double dot(Vector);
-   Vector cross(Vector);
+   Vector normalize() const;
+   static double dot(Vector, Vector);
+   Vector cross(Vector) const;
 
    // Utility functions
-   char  *toString();
+   char  *toString() const;
 
    // Overloaded operators
-   Vector operator+(const Vector&);
+   Vector operator+(const Vector&) const;
 
-   Vector operator-(const Vector&);
+   Vector operator-(const Vector&) const;
 
-   Vector operator*(const Vector&);
-   Vector operator*(const double&);
+   Vector operator*(const double&) const;
 
-   Vector operator/(const Vector&);
-   Vector operator/(const double&);
-
-   Vector operator%(const double&);
+   Vector operator/(const Vector&) const;
+   Vector operator/(const double&) const;
 
 };
+inline Vector operator*(double s, const Vector &v) {
+   return v*s;
+}
 bool   operator==(const Vector&, const Vector&);
 bool   operator!=(const Vector&, const Vector&);
 

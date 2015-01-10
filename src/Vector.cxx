@@ -24,19 +24,19 @@ Vector::Vector(double *in) {
    y = in[1];
    z = in[2];
 }
-double Vector::GetMagnitude()
+double Vector::GetMagnitude() const
 {
-   return sqrt(this->dot(*this));
+   return sqrt(Vector::dot(*this, *this));
 }
-Vector Vector::normalize()
+Vector Vector::normalize() const
 {
    return *this/GetMagnitude();
 }
-double Vector::dot(Vector v)
+double Vector::dot(Vector v1, Vector v2)
 {
-   return ((x*v.x) + (y*v.y) + (z*v.z));
+   return ((v1.x*v2.x) + (v1.y*v2.y) + (v1.z*v2.z));
 }
-Vector Vector::cross(Vector v)
+Vector Vector::cross(Vector v) const
 {
    Vector newV(( y * v.z) - ( z * v.y),
                ( z * v.x) - ( x * v.z),
@@ -44,46 +44,32 @@ Vector Vector::cross(Vector v)
    return newV;
 }
 
-char * Vector::toString()
+char * Vector::toString() const
 {
    char * msg = new char[1024];
    sprintf(msg, "Vector Components: (%f, %f, %f)", x, y, z);
    return msg;
 }
 
-Vector Vector::operator+(const Vector& v)
+Vector Vector::operator+(const Vector& v)  const
 {
    return Vector(this->x+v.x, this->y+v.y, this->z+v.z);
 }
-Vector Vector::operator-(const Vector& v)
+Vector Vector::operator-(const Vector& v) const
 {
    return Vector(this->x-v.x, this->y-v.y, this->z-v.z);
 }
-Vector Vector::operator*(const Vector& v)
-{
-   return Vector(this->x*v.x, this->y*v.y, this->z*v.z);
-}
-Vector Vector::operator*(const double& coeff)
+Vector Vector::operator*(const double& coeff) const
 {
    return Vector(this->x*coeff, this->y*coeff, this->z*coeff);
 }
-Vector Vector::operator/(const Vector& v)
+Vector Vector::operator/(const Vector& v) const
 {
    return Vector(this->x/v.x, this->y/v.y, this->z/v.z);
 }
-Vector Vector::operator/(const double& coeff)
+Vector Vector::operator/(const double& coeff) const
 {
    return Vector(this->x/coeff, this->y/coeff, this->z/coeff);
-}
-Vector Vector::operator%(const double& mod)
-{
-   double newX = x;
-   double newY = y;
-   double newZ = z;
-   while(newX >= mod) { newX-= mod; };
-   while(newY >= mod) { newY-= mod; };
-   while(newZ >= mod) { newZ-= mod; };
-   return Vector(newX, newY, newZ);
 }
 bool   operator==(const Vector& first, const Vector &other) {
     return (first.x == other.x &&
